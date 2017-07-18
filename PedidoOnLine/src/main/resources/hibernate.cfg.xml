@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Configuração do driver do banco de dados -->
+		<property name="hibernate.connection.driver_class">org.firebirdsql.jdbc.FBDriver</property>
+		<!-- A URL de conexão ao banco de dados -->
+		<property name="hibernate.connection.url">jdbc:firebirdsql:localhost/3050:C:/rlweb/banco001_apetitoso.fdb?lc_ctype=utf8</property>
+		<!-- Nome do usuario -->
+		<property name="hibernate.connection.username">sysdba</property>
+		<!-- Senha do usuário -->
+		<property name="hibernate.connection.password">masterkey</property>
+		<!-- O dialeto usado pelo Hibernate para conversar com o banco -->
+		<property name="hibernate.dialect">org.hibernate.dialect.FirebirdDialect</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!--	
+		<property name="hibernate.connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		<property name="hibernate.org.c3p0.min_size">2</property>
+		<property name="hibernate.org.c3p0.max_size">10</property>
+		<property name="hibernate.org.c3p0.timeout">180</property>
+		<property name="hibernate.org.c3p0.idle_test_period">100</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		<property name="hibernate.cache.use_structured_entries">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		-->
+
+		<mapping class="br.com.rlsistemas.pedidosonline.produto.Produto"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.usuario.Usuario"></mapping>
+	</session-factory>
+</hibernate-configuration>
