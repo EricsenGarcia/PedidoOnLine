@@ -1,4 +1,4 @@
-package br.com.rlsistemas.pedidosonline.usuario;
+package br.com.rlsistemas.pedidosonline.usuarioWeb;
 
 import java.util.List;
 
@@ -7,31 +7,31 @@ import org.hibernate.Query;
 
 import br.com.rlsistemas.pedidosonline.util.DAOFactory;
 
-public class UsuarioRN {
+public class UsuarioWebRN {
 	
-	private UsuarioDAO usuarioDao;
+	private UsuarioWebDAO usuarioDao;
 
-	public UsuarioRN() {
+	public UsuarioWebRN() {
 		this.usuarioDao = DAOFactory.criarUsuarioDAO();
 	}
 	
-	public void salvar(Usuario usuario) {
+	public void salvar(UsuarioWeb usuario) {
 		this.usuarioDao.salvar(usuario);
 	}
 	
-	public void carregar(String codigo) {
+	public void carregar(Integer codigo) {
 		this.usuarioDao.carregar(codigo);
 	}
 	
-	public void excluir(Usuario usuario){
+	public void excluir(UsuarioWeb usuario){
 		this.usuarioDao.excluir(usuario);
 	}
 	
-	public List<Usuario> listar(){
+	public List<UsuarioWeb> listar(){
 		return this.usuarioDao.listar();
 	}
 	
-	public Usuario buscarPorLogin(String login){
+	public UsuarioWeb buscarPorLogin(String login){
 		return this.usuarioDao.buscarPorLogin(login);
 	}
 

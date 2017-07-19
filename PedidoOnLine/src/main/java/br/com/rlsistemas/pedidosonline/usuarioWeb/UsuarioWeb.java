@@ -1,27 +1,57 @@
-package br.com.rlsistemas.pedidosonline.usuario;
+package br.com.rlsistemas.pedidosonline.usuarioWeb;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-public class Usuario implements Serializable{
+public class UsuarioWeb implements Serializable{
 	
 	@Id
-	@Column(name="USUA_CODIGO")
+	@GeneratedValue
+	@Column(name="USUAW_CODIGO")
 	private Integer id;
 	
-	@Column(name="USUA_NOME")	
+	@Column(name="USUAW_LOGIN")	
+	@org.hibernate.annotations.NaturalId
 	private String 	login;
 	
-	@Column(name="USUA_SENHA")
+	@Column(name="USUAW_SENHA")
 	private String 	senha;
 	
-	@Column(name="USUA_ATIVO")
+	@Column(name="USUAW_ATIVO")
 	private Integer ativo;
 	
+	@Column(name="USUAW_NIVEL")
+	private String nivel;
+	
+	
+	@ElementCollection(targetClass = String.class)
+	@JoinTable( name="usuarioWeb_acesso",
+				uniqueConstraints = {@UniqueConstraint(columnNames={"usuario", "acesso"})},
+				joinColumns = @JoinColumn(name = "usuario")	
+				)
+	@Column(name="acesso", length=50)
+	private Set<String> acesso = new HashSet<String>(); 
+	
+
+	public Set<String> getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(Set<String> acesso) {
+		this.acesso = acesso;
+	}
 
 	public Integer getId() {
 		return id;
@@ -55,6 +85,14 @@ public class Usuario implements Serializable{
 		this.ativo = ativo;
 	}
 
+	public String getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,6 +100,7 @@ public class Usuario implements Serializable{
 		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nivel == null) ? 0 : nivel.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
@@ -74,7 +113,7 @@ public class Usuario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		UsuarioWeb other = (UsuarioWeb) obj;
 		if (ativo == null) {
 			if (other.ativo != null)
 				return false;
@@ -90,6 +129,11 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!login.equals(other.login))
 			return false;
+		if (nivel == null) {
+			if (other.nivel != null)
+				return false;
+		} else if (!nivel.equals(other.nivel))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -97,7 +141,13 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UsuarioWeb [id=" + id + ", login=" + login + ", senha=" + senha + ", ativo=" + ativo + ", nivel="
+				+ nivel + ", acesso=" + acesso + "]";
+	}
+
 	
 	
 	

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<h1>Listagem de usuários</h1>
+	<h:form acceptcharset="UFT-8">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:dataTable value="#{usuarioBean.lista}" var="usuario" reflow="true" rows="5" paginator="true"	lazy="true" cellpadding="5"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			<p:column headerText="Código">
+				<h:outputLabel value="#{usuario.id}"></h:outputLabel>
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputLabel value="#{usuario.login}"></h:outputLabel>
+			</p:column>	
+			<p:column headerText="Ativo" style="max-width: 50px; min-width: 50px; overflow: hidden">
+				<h:commandLink action="#{usuarioBean.ativar}">
+					<h:graphicImage library="imagens" name="ativo#{usuario.ativo}.png" style="border:0"/>
+					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
+				</h:commandLink>			
+			</p:column>	
+		</p:dataTable>
+		<h:commandButton action="#{usuarioBean.novo}" value="Novo Usuário"/>		
+	</h:form>
+</h:body>
+</html>

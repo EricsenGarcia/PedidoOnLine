@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true">
+	<Resource 	name="jdbc/conectionDB" 
+				auth="Container" 
+				type="javax.sql.DataSource"
+				maxActive="100" 
+				maxIdle="30" 
+				maxWait="10000" 
+				username="sysdba" 
+				password="masterkey"
+				driverClassName="org.firebirdsql.jdbc.FBDriver"
+				url="jdbc:firebirdsql:localhost/3050:C:/rlweb/banco001_apetitoso.fdb?lc_ctype=utf8" />
+</Context>

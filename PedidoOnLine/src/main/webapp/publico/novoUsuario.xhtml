@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
@@ -13,21 +14,19 @@
 <h:body>
 	<h:form acceptcharset="UTF-8">
 		<h:messages />
+		<p:growl id="growl" showDetail="true" sticky="true" />  
 		<h:panelGrid columns="2">
+			<h:inputHidden value="#{usuarioBean.usuario.id}"></h:inputHidden>			
 			<h:inputHidden value="#{usuarioBean.usuario.ativo}"></h:inputHidden>			
-			<h:inputHidden value="#{usuarioBean.usuario.ativo}"></h:inputHidden>
-		
-			<h:outputLabel value="Código" for="codigo" />
-			<h:inputText value="#{usuarioBean.usuario.id}" maxlength="3" required="true" />
 			
 			<h:outputLabel value="Nome" for="nome" />
-			<h:inputText value="#{usuarioBean.usuario.login}" maxlength="40" required="true" />
+			<h:inputText value="#{usuarioBean.usuario.login}" maxlength="40" />
 			
 			<h:outputLabel value="Senha" for="senha" />
-			<h:inputText value="#{usuarioBean.usuario.senha}" maxlength="10" required="true" />
+			<h:inputText value="#{usuarioBean.usuario.senha}" maxlength="10" />
 			
-			<h:commandButton action="#{usuarioBean.salvar}" value="Salvar"></h:commandButton>		
-			<h:commandButton action="index" value="Cancelar"></h:commandButton>
+			<h:commandButton action="#{usuarioBean.salvar}" value="Salvar" ajax="false"></h:commandButton>		
+			<h:commandButton action="/index" value="Cancelar"></h:commandButton>
 		</h:panelGrid>	
 	</h:form>	
 </h:body>

@@ -1,7 +1,7 @@
 package br.com.rlsistemas.pedidosonline.util;
 
 import br.com.rlsistemas.pedidosonline.produto.*;
-import br.com.rlsistemas.pedidosonline.usuario.*;
+import br.com.rlsistemas.pedidosonline.usuarioWeb.*;
 
 
 public class DAOFactory {
@@ -16,8 +16,8 @@ public class DAOFactory {
 		return produtoDao;
 	}
 
-	public static UsuarioDAO criarUsuarioDAO() {
-		UsuarioDAOHibernate usuarioDao = new UsuarioDAOHibernate();
+	public static UsuarioWebDAO criarUsuarioDAO() {
+		UsuarioWebDAOHibernate usuarioDao = new UsuarioWebDAOHibernate();
 		usuarioDao.setSession(HibernateUtil.getSessionFactory().getCurrentSession());
 		return usuarioDao;
 	}

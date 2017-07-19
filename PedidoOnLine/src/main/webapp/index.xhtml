@@ -13,8 +13,13 @@
 <h:body>
 	<h:outputText value="ola123" />
 	<h:form>
-		<h:commandLink action="#{produtoBean.novo}">Novo Produto</h:commandLink>
-		<h:commandButton action="/publico/listUsuario" value="Usuários"/>		
+		<!-- 
+		<h:commandButton action="/privado/listProduto" value="Produtos"/><br />
+		<h:commandButton action="/publico/listUsuario" value="Usuários"/>
+		 -->		
+		 <h:commandButton action="privado/principal" value="Entrar"/>
+		 
+		 <a onclick="document.location='#{request.contextPath}/j_spring_security_logout'" title="Logout">Sair</a>
 	</h:form>
 
 </h:body>
