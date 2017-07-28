@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+<h:body>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top scrolling-navbar">
+		<div class="container">		
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<h:form>				
+					<p:commandLink class="navbar-brand" action="principal">Home</p:commandLink>
+					<p:commandLink class="navbar-brand" action="listProduto">Produtos</p:commandLink>					
+					<p:commandLink class="navbar-brand" action="/admin/listUsuario" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}" >Usuários</p:commandLink>					
+					<p:commandLink class="navbar-brand" action="carrinho">Carrinho</p:commandLink>
+				</h:form>							
+			</div>		  		
+			
+			<h:form class="navbar-form navbar-right">
+				<div class="form-group">
+					<p:commandButton action="#{produtoBean.listComFiltro}" value="Pesquizar">					
+						<input type="text" class="form-control" placeholder="O que precisa?" value="#{produtoBean.filtro}" />						 
+					</p:commandButton>
+					
+				</div>						
+			</h:form>
+		</div>
+	</nav>
+	
+	
+	<!-- /.navbar-collapse -->	
+	<!-- /.container-fluid --> 
+	
+</h:body>
+</html>

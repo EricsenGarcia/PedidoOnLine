@@ -8,6 +8,7 @@ public interface ProdutoDAO {
 	public void atualizar(Produto produto);
 	public void excluir(Produto produto);
 	public Produto carregar(String codigo);
-	public List<Produto> listar(); 
+	public List<Produto> listar();
+	public List<Produto> listarFiltro(String filtro);
 
 }

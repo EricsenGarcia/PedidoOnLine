@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" 
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="corpo">		
+		<h:form>			
+			<div class="container" >
+				<p:dataTable value="#{carrinhoBean.carrinho}" var="carrinho" reflow="true" >
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Carrinho de compras" />						
+						</p:outputPanel>
+					</f:facet>
+					<p:column headerText="Código">
+						<h:outputLabel value="#{carrinho.produto.codigo}"></h:outputLabel>
+					</p:column>
+					<p:column headerText="Produto">
+						<h:outputLabel value="#{carrinho.produto.descricao}"></h:outputLabel>
+					</p:column>						
+					<p:column headerText="Quantidade">
+						<h:outputLabel value="#{carrinho.quantidade}">
+							<f:convertNumber currencySymbol="R$" type="number"/>
+						</h:outputLabel>
+					</p:column>
+					<p:column headerText="Preço">
+						<h:outputLabel value="#{carrinho.produto.preco}">
+							<f:convertNumber currencySymbol="R$" type="currency"/>	
+						</h:outputLabel>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</h:form>	    
+	</ui:define>	
+</ui:composition>
+</html>

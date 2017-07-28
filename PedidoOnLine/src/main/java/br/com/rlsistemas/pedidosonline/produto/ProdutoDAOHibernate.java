@@ -2,7 +2,10 @@ package br.com.rlsistemas.pedidosonline.produto;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class ProdutoDAOHibernate implements ProdutoDAO {
 	
@@ -33,8 +36,17 @@ public class ProdutoDAOHibernate implements ProdutoDAO {
 	}
 
 	public List<Produto> listar() {
-		return this.session.createCriteria(Produto.class).list();
-		
+		return this.session.createCriteria(Produto.class).list();		
+	}
+	
+	public List<Produto> listarFiltro(String filtro){
+		if ((filtro == null) || (filtro.equals("") ) ){
+			return listar();
+		} else {				
+			Criteria criteria = session.createCriteria(Produto.class);
+			criteria.add(Restrictions.like("descricao", filtro, MatchMode.ANYWHERE));		
+			return criteria.list();			
+		}
 	}
 
 }

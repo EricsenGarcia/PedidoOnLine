@@ -16,7 +16,17 @@ public class Produto implements Serializable{
 	@Column(name="PRO_DESCRICAO")
 	private String descricao;
 
+	@Column(name="PRO_PRECOVENDA")
+	private Double preco;
 	
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
 
 	public Produto() {
 		super();
@@ -37,13 +47,14 @@ public class Produto implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		return result;
 	}
 
@@ -66,11 +77,12 @@ public class Produto implements Serializable{
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
+		if (preco == null) {
+			if (other.preco != null)
+				return false;
+		} else if (!preco.equals(other.preco))
+			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }

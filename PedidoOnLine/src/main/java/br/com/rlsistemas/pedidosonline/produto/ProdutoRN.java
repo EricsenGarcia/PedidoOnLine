@@ -27,5 +27,9 @@ public class ProdutoRN {
 	public List<Produto> listar(){
 		return this.produtoDao.listar();
 	}
+	
+	public List<Produto> listarComFiltro(String filtro){
+		return this.produtoDao.listarFiltro(filtro);
+	}
 
 }

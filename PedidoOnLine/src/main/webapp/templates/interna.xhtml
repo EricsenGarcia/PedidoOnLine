@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8;" />
+	<title><ui:insert name="titulo">RL</ui:insert></title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<h:body>
+	<p:growl id="growl" showDetail="true" sticky="true" />		
+	<div id="container">
+		<div id="titulo">
+			<ui:insert name="titulo">				
+				<nav class="navbar" style="margin-bottom: 0">
+					<div class="container">							
+						<div class="col-xs-12 col-sm-12 col-md-12 nav-header-secundario">	
+							<DIV class="col-xs-6 col-sm-6 col-md-6 text-left">										
+								<span>Seja bem vindo.</span>
+							</DIV>
+							<DIV class="col-xs-6 col-sm-6 col-md-6 text-right">										
+								<span>Usuário: #{request.remoteUser}</span>
+								<a onclick="document.location='#{request.contextPath}/j_spring_security_logout'" title="Sair"> | Sair</a>
+							</DIV>					
+						</div>
+					</div>
+				</nav> 
+				<nav class="navbar">
+					<div class="container">	
+						<div class="col-md-3 .col-md-offset-6">										
+							<IMG  src="http://www.rlsistemas.com.br/images/logo.png" />
+						</div>								
+					</div>
+				</nav>
+			</ui:insert>
+		</div>
+
+
+		<div id="barra_menu">
+			<ui:insert name="barra_menu">
+				<ui:include src="/privado/menu.xhtml" />
+			</ui:insert>
+		</div>
+	
+	
+		<div id="corpo">
+			<ui:insert name="corpo" />
+		</div>
+	
+		<div id="rodape">
+			<ui:insert name="rodape">
+				<ui:include src="/publico/rodape.xhtml"></ui:include>
+			</ui:insert>
+		</div>
+	</div>
+
+</h:body>
+</html>

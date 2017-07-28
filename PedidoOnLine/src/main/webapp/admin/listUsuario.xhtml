@@ -11,26 +11,27 @@
 
 </h:head>
 
-<h:body>
-	<h1>Listagem de usuários</h1>
-	<h:form acceptcharset="UFT-8">
-		<p:growl id="growl" showDetail="true" sticky="true" />
-		<p:dataTable value="#{usuarioBean.lista}" var="usuario" reflow="true" rows="5" paginator="true"	lazy="true" cellpadding="5"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-			<p:column headerText="Código">
-				<h:outputLabel value="#{usuario.id}"></h:outputLabel>
-			</p:column>
-			<p:column headerText="Nome">
-				<h:outputLabel value="#{usuario.login}"></h:outputLabel>
-			</p:column>	
-			<p:column headerText="Ativo" style="max-width: 50px; min-width: 50px; overflow: hidden">
-				<h:commandLink action="#{usuarioBean.ativar}">
-					<h:graphicImage library="imagens" name="ativo#{usuario.ativo}.png" style="border:0"/>
-					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
-				</h:commandLink>			
-			</p:column>	
-		</p:dataTable>
-		<h:commandButton action="#{usuarioBean.novo}" value="Novo Usuário"/>		
-	</h:form>
-</h:body>
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="corpo">
+		<h:form acceptcharset="UFT-8">
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<p:dataTable value="#{usuarioBean.lista}" var="usuario" reflow="true" rows="5" paginator="true"	lazy="true" cellpadding="5"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<p:column headerText="Código">
+					<h:outputLabel value="#{usuario.id}"></h:outputLabel>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputLabel value="#{usuario.login}"></h:outputLabel>
+				</p:column>	
+				<p:column headerText="Ativo" style="max-width: 50px; min-width: 50px; overflow: hidden">
+					<h:commandLink action="#{usuarioBean.ativar}">
+						<h:graphicImage library="imagens" name="ativo#{usuario.ativo}.png" style="border:0"/>
+						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
+					</h:commandLink>			
+				</p:column>	
+			</p:dataTable>
+			<h:commandButton action="#{usuarioBean.novo}" value="Novo Usuário"/>		
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
