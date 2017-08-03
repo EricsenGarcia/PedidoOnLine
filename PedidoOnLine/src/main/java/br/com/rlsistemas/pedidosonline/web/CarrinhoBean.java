@@ -11,30 +11,23 @@ import javax.faces.context.FacesContext;
 
 import br.com.rlsistemas.pedidosonline.carrinho.Carrinho;
 import br.com.rlsistemas.pedidosonline.produto.Produto;
+import br.com.rlsistemas.pedidosonline.produto.ProdutoRN;
 
 @ManagedBean(name="carrinhoBean")
 @SessionScoped
-public class CarrinhoBean {
+public class CarrinhoBean {	
 	
-	
-	private List<Carrinho> carrinho;
-	private Produto produto;
-	private String filtro;
+	private List<Carrinho> carrinho;	
 	
 	public CarrinhoBean(){
 		this.carrinho = new ArrayList<Carrinho>();
 	}
 	
-	public void novoProduto(){
-		this.produto = new Produto();	
-		
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Sucesso", "Adicionado ao carrinho"));		
-	}
+	
 	
 	public void novoProduto3(Produto produto, Double qtde){		
-		Carrinho car = new Carrinho();
+		Carrinho car = new Carrinho();	
+		
 		car.setProduto(produto);
 		if (qtde == null){
 			car.setQuantidade(1.0);
@@ -48,6 +41,42 @@ public class CarrinhoBean {
 		context.addMessage(null, new FacesMessage("Sucesso","Adicionado ao carrinho: "+produto.getDescricao()));		
 	}
 	
+	
+	public void teste(String cod){
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		ProdutoBean produtoBean = (ProdutoBean) context.getELContext().getELResolver().getValue(context.getELContext(),
+//				null, "produtoBean");
+		
+		
+		cod = "0000000005";
+		Produto prod = new Produto(); 
+		
+		ProdutoRN produtoRN = new ProdutoRN();
+		prod = produtoRN.carregar(cod);
+		
+		this.novoProduto3(prod,1.0);
+		
+		
+//		produtoBean.consultaProduto("");
+	}
+	
+	public String teste2(String cod){
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		ProdutoBean produtoBean = (ProdutoBean) context.getELContext().getELResolver().getValue(context.getELContext(),
+//				null, "produtoBean");
+		
+		
+		
+		Produto prod = new Produto(); 
+		
+		ProdutoRN produtoRN = new ProdutoRN();
+		prod = produtoRN.carregar(cod);
+		
+		this.novoProduto3(prod,1.0);
+		
+		return "principal";
+		
+	}
 
 	public List<Carrinho> getCarrinho() {
 		return carrinho;
@@ -57,21 +86,7 @@ public class CarrinhoBean {
 		this.carrinho = carrinho;		
 	}
 
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
+	
 	
 	
 

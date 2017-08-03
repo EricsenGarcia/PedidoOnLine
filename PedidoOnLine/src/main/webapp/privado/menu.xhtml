@@ -14,22 +14,31 @@
 	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top scrolling-navbar">
 		<div class="container">		
 			<div class="navbar-header">
+				<!-- 
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
 				</button>
+				 -->
 				<h:form>				
-					<p:commandLink class="navbar-brand" action="principal">Home</p:commandLink>
+					<p:commandLink class="navbar-brand" action="principal?faces-redirect=true">Home</p:commandLink>
 					<p:commandLink class="navbar-brand" action="listProduto">Produtos</p:commandLink>					
-					<p:commandLink class="navbar-brand" action="/admin/listUsuario" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}" >Usuários</p:commandLink>					
+					<!--  <p:commandLink class="navbar-brand" action="/admin/listUsuario" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}" >Usuários</p:commandLink>-->					
 					<p:commandLink class="navbar-brand" action="carrinho">Carrinho</p:commandLink>
 				</h:form>							
 			</div>		  		
 			
 			<h:form class="navbar-form navbar-right">
-				<div class="form-group">
-					<p:commandButton action="#{produtoBean.listComFiltro}" value="Pesquizar">					
-						<input type="text" class="form-control" placeholder="O que precisa?" value="#{produtoBean.filtro}" />						 
-					</p:commandButton>
+				<div class="form-group">					 
+					
+					<h:inputText value="#{produtoBean.filtro}" type="text" class="form-control" placeholder="O que precisa?"/>
+					<h:commandButton action="#{produtoBean.consultaProduto(produtoBean.filtro)}" />
+					
+    					
+    				
+					
 					
 				</div>						
 			</h:form>

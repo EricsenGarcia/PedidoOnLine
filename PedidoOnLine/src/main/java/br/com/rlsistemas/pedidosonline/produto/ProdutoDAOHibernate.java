@@ -44,7 +44,7 @@ public class ProdutoDAOHibernate implements ProdutoDAO {
 			return listar();
 		} else {				
 			Criteria criteria = session.createCriteria(Produto.class);
-			criteria.add(Restrictions.like("descricao", filtro, MatchMode.ANYWHERE));		
+			criteria.add(Restrictions.like("descricao", filtro.toUpperCase(), MatchMode.ANYWHERE));		
 			return criteria.list();			
 		}
 	}

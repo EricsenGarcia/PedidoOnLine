@@ -16,7 +16,7 @@
 	<ui:define name="corpo">		
 		<h:form>			
 			<div class="container" >
-				<p:dataTable value="#{carrinhoBean.carrinho}" var="carrinho" reflow="true" >
+				<p:dataTable value="#{carrinhoBean.carrinho}" var="carrinho" reflow="true" emptyMessage="Não há itens no registro.">
 					<f:facet name="header">
 						<p:outputPanel>
 							<h:outputText value="Carrinho de compras" />						
@@ -29,12 +29,15 @@
 						<h:outputLabel value="#{carrinho.produto.descricao}"></h:outputLabel>
 					</p:column>						
 					<p:column headerText="Quantidade">
-						<h:outputLabel value="#{carrinho.quantidade}">
-							<f:convertNumber currencySymbol="R$" type="number"/>
-						</h:outputLabel>
+						<p:spinner value="#{carrinho.quantidade}" size="2"></p:spinner>						
 					</p:column>
 					<p:column headerText="Preço">
 						<h:outputLabel value="#{carrinho.produto.preco}">
+							<f:convertNumber currencySymbol="R$" type="currency"/>	
+						</h:outputLabel>
+					</p:column>
+					<p:column headerText="Total">
+						<h:outputLabel value="#{carrinho.produto.preco * carrinho.quantidade}">
 							<f:convertNumber currencySymbol="R$" type="currency"/>	
 						</h:outputLabel>
 					</p:column>

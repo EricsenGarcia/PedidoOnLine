@@ -1,12 +1,17 @@
 package br.com.rlsistemas.pedidosonline.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import br.com.rlsistemas.pedidosonline.carrinho.Carrinho;
 import br.com.rlsistemas.pedidosonline.produto.Produto;
@@ -19,6 +24,7 @@ public class ProdutoBean {
 	
 	private Produto produto = new Produto();
 	private List<Produto> lista;
+	private List<Produto> listaFiltrada;
 	private String filtro;
 	
 	
@@ -89,15 +95,15 @@ public class ProdutoBean {
 
 	public List<Produto> consultarProdutos(String filtro){
 		System.out.println("bone"+filtro);	
-		if (this.lista == null){
+		if (this.listaFiltrada == null){
 			ProdutoRN produtoRn = new ProdutoRN();
-			this.lista = produtoRn.listarComFiltro(filtro);
+			this.listaFiltrada = produtoRn.listarComFiltro(filtro);
 		}
 		 
-		return this.lista;		
+		return this.listaFiltrada;		
 	}
+		
 	
-	@PostConstruct
 	public List<Produto> consultaUrl() throws Exception{
 		
 		String filtro = FacesContext
@@ -106,13 +112,14 @@ public class ProdutoBean {
 						.getRequestParameterMap()
 						.get("filtro");
 		
-		if ( filtro.equals("") ){
-			ProdutoRN produtoRn = new ProdutoRN();
-			this.lista = produtoRn.listar();
-		}else{
-			ProdutoRN produtoRn = new ProdutoRN();
+		ProdutoRN produtoRn = new ProdutoRN();
+		if ( filtro == null || filtro.equals("") ){			
+			this.lista = produtoRn.listar();			
+		}else{		
 			this.lista = produtoRn.listarComFiltro(filtro);
-		}		
+		}
+		
+//		this.listaFiltrada = Iterables.filter( this.lista, Predicates.containsPattern(filtro) );
 		
 		return this.lista;
 	}
@@ -120,9 +127,17 @@ public class ProdutoBean {
 	public String consultaProduto(String filtro){		
 		this.filtro = filtro;		
 		
-		return "principal";		
+		return "principal?faces-redirect=truefiltro="+filtro;		
+	}
+
+	public List<Produto> getListaFiltrada() {
+		return listaFiltrada;
+	}
+
+	public void setListaFiltrada(List<Produto> listaFiltrada) {
+		this.listaFiltrada = listaFiltrada;
 	}
 	
 	
-
+	
 }

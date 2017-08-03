@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
@@ -15,6 +16,9 @@
 	
 	Nome: <h:outputLabel value="#{produtoBean.produto.codigo}"></h:outputLabel> <br></br>
 	Descrição: <h:outputLabel value="#{produtoBean.produto.descricao}"></h:outputLabel> <br></br>
+	<ui:repeat var="foto" value="#{fotoBean.lista}">
+		<h:outputLabel value="#{foto.id.codigo}"></h:outputLabel><br></br>
+	</ui:repeat>	
 	
 	<h:form>
 		<h:commandButton action="index" value="Inicio"></h:commandButton>

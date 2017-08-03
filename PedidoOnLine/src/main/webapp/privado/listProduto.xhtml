@@ -13,32 +13,37 @@
 
 <ui:composition template="/templates/interna.xhtml">
 	<ui:define name="corpo">
-		<h:form acceptcharset="UFT-8">		
-			<p:dataTable value="#{produtoBean.lista}" var="produto" reflow="true" rows="50" paginator="true" rowsPerPageTemplate="30,60,100">				
-                <f:facet name="header">
-					<p:outputPanel>
-						<h:outputText value="Listagem de Produtos" />						
-					</p:outputPanel>
-				</f:facet>
-				                
-				<p:column headerText="Código" style="max-width: 45px; min-width: 45px; overflow: hidden">
-					<h:outputLabel value="#{produto.codigo}"></h:outputLabel>
-				</p:column>
-				<p:column headerText="Nome">
-					<h:outputLabel value="#{produto.descricao}"></h:outputLabel>
-				</p:column>		
-				<p:column headerText="Preço">
-					<h:outputLabel value="#{produto.preco}">
-						<f:convertNumber currencySymbol="R$" type="currency"/>						
-					</h:outputLabel>
-				</p:column>
-				<p:column headerText="Quantidade">
-					<p:spinner binding="#{qt}" min="1" size="2"></p:spinner>
-				</p:column>
-				<p:column headerText="Operação">														
-					<p:commandButton icon="ui-icon-cart" value="Comprar" actionListener="#{carrinhoBean.novoProduto3(produto, qt.value)}" update="growl" />						
-				</p:column>
-			</p:dataTable>					
+		<h:form >
+			<div class="container">					
+				<p:dataTable	id="produtoId" var="produto" value="#{produtoBean.lista}" 
+				                rows="10" 
+				                paginator="true" rowsPerPageTemplate="15,30,100"			                
+				                emptyMessage="Nenhum produto encontrado.">			
+	                
+					<f:facet name="header">
+						<h:outputText value="Produtos"></h:outputText>
+					</f:facet>                
+					<p:column headerText="Código" style="max-width: 45px; min-width: 45px; overflow: hidden">
+						<h:outputLabel value="#{produto.codigo}"></h:outputLabel>
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputLabel value="#{produto.descricao}"></h:outputLabel>
+					</p:column>		
+					<p:column headerText="Preço">
+						<h:outputLabel value="#{produto.preco}">
+							<f:convertNumber currencySymbol="R$" type="currency"/>						
+						</h:outputLabel>
+					</p:column>
+					<p:column headerText="Quantidade">
+						<p:spinner binding="#{qt}" min="1" size="2"></p:spinner>
+					</p:column>
+					 
+					<p:column headerText="Operação">														
+						<p:commandButton icon="ui-icon-cart" value="Comprar" actionListener="#{carrinhoBean.novoProduto3(produto, qt.value)}" update="growl" />						
+					</p:column>
+					
+				</p:dataTable>
+			</div>						
 		</h:form>
 	</ui:define>
 </ui:composition>

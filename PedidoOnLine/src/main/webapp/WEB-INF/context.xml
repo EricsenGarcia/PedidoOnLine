@@ -10,4 +10,16 @@
 				password="masterkey"
 				driverClassName="org.firebirdsql.jdbc.FBDriver"
 				url="jdbc:firebirdsql:localhost/3050:C:/rlweb/banco001_apetitoso.fdb?lc_ctype=utf8" />
+				
+				
+	<Resource 	name="jdbc/fotoDB" 
+				auth="Container" 
+				type="javax.sql.DataSource"
+				maxActive="100" 
+				maxIdle="30" 
+				maxWait="10000" 
+				username="sysdba" 
+				password="masterkey"
+				driverClassName="org.firebirdsql.jdbc.FBDriver"
+				url="jdbc:firebirdsql:localhost/3050:C:/rlweb/BANCO_FOTO.FDB?lc_ctype=utf8" />
 </Context>

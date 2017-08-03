@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory>
+	<session-factory name="principal">
 		<!-- 
 		<property name="hibernate.connection.driver_class">org.firebirdsql.jdbc.FBDriver</property>		
 		<property name="hibernate.connection.url">jdbc:firebirdsql:localhost/3050:C:/rlweb/banco001_apetitoso.fdb?lc_ctype=utf8</property>		
@@ -29,5 +29,6 @@
 
 		<mapping class="br.com.rlsistemas.pedidosonline.produto.Produto"></mapping>
 		<mapping class="br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWeb"></mapping>
-	</session-factory>
+	</session-factory>	
+	
 </hibernate-configuration>

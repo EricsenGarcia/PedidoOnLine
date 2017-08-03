@@ -14,38 +14,42 @@
 
 <ui:composition template="/templates/interna.xhtml">
 	<ui:define name="corpo">
-		<h:form>			
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />			
 			<div class="container" >
-				<h:inputText id="ft" value="#{carrinhoBean.filtro}" />					
-				<ui:repeat var="produto" value="#{produtoBean.consultaUrl}">			
-				<div class="col-lg-3 col-md-6 mb-r">										
-					<div class="card card-cascade narrower">
-									
-						<div class="view overlay hm-white-slight" >
-							<img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(15).jpg" class="img-fluid" alt="" style="max-height: 300px"/> 
-							
-						</div>						
-						<div class="card-block text-center">						
-							<div class="nomeProd">							
-								<p class="card-text">#{produto.descricao}</p>
+			 							
+				<ui:repeat var="produto" value="#{produtoBean.consultaUrl()}">			
+					<div class="col-lg-3 col-md-6 mb-r" style="height: 358px">										
+						<div class="card card-cascade narrower">
+										
+							<div class="view overlay hm-white-slight" style="max-height: 300px; max-width:200px; min-height: 200px" >							 							 						
+								 <h:graphicImage 	value="data:image/png;base64,#{fotoBean.buscaFoto(produto)}"  
+								 					class="img-fluid" alt="" 
+								 					style="max-height: 300px; max-width:200px"/>
 							</div>
-							<div class="card-footer">
-								<h3 class="prodPreco">R$ #{produto.preco}</h3>								
-								<h:panelGrid columns="2">									
-									<p:spinner binding="#{qt}" size="2" min="1" value="1"/>									
-									<p:commandButton icon="ui-icon-cart" value="Comprar" actionListener="#{carrinhoBean.novoProduto3(produto, qt.value)}" update="growl">										
-										<!--  <p:collector value="#{produto}" addTo="#{carrinhoBean.carrinho}"></p:collector> -->
-									</p:commandButton>																				
-								</h:panelGrid>								
-							</div>							
+													
+							<div class="card-block text-center">
+								<h:inputHidden value="#{produto.codigo}" binding="#{codigo}" />						
+								<div class="nomeProd">							
+									<p class="card-text">#{produto.descricao}</p>
+								</div>
+								<div class="card-footer">
+									<h3 class="prodPreco">R$ #{produto.preco}</h3>								
+									<h:panelGrid columns="2">																			
+										<p:spinner binding="#{qt}" size="2" min="1" value="1"/>									
+										<p:commandButton 	icon="ui-icon-cart" value="Comprar" 
+															actionListener="#{carrinhoBean.teste(codigo.value)}" update="growl">						
+											
+										</p:commandButton>																				
+									</h:panelGrid>								
+								</div>							
+								
+							</div>
 							
 						</div>
-						
 					</div>
-				</div>
 				</ui:repeat>			
-			</div>
-			<button class="btn-primary">teste</button>
+			</div>			
 		</h:form>
 	</ui:define>
 </ui:composition>
