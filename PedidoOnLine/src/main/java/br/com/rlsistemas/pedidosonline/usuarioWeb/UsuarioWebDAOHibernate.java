@@ -46,7 +46,7 @@ public class UsuarioWebDAOHibernate implements UsuarioWebDAO {
 	}
 
 	public UsuarioWeb buscarPorLogin(String login) {
-		String hql = "select u from Usuario u where u.usua_nome = :login";
+		String hql = "select u from UsuarioWeb u where u.login = :login";
 		Query consulta = this.session.createQuery(hql);
 		consulta.setString("login", login);
 

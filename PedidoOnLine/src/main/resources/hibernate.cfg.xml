@@ -29,6 +29,11 @@
 
 		<mapping class="br.com.rlsistemas.pedidosonline.produto.Produto"></mapping>
 		<mapping class="br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWeb"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.entidade.Entidade"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.representante.Representante"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.entidade.EntidadeFormaPagamento"></mapping>
+		
 	</session-factory>	
 	
 </hibernate-configuration>

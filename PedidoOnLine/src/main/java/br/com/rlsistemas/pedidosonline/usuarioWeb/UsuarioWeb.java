@@ -11,8 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
+
+import br.com.rlsistemas.pedidosonline.entidade.Entidade;
+
 
 @Entity
 public class UsuarioWeb implements Serializable{
@@ -35,6 +42,18 @@ public class UsuarioWeb implements Serializable{
 	@Column(name="USUAW_NIVEL")
 	private String nivel;
 	
+	@Column(name="ENT_CODIGO")
+	private String ent_codigo;
+	
+	@Column(name="EMPRESA")
+	private String ent_empresa;
+	
+//	@ManyToOne
+//	@JoinColumns({		
+//		@JoinColumn(name="EMPRESA", referencedColumnName="EMPRESA", insertable=false, updatable=false),
+//		@JoinColumn(name="ENT_CODIGO", referencedColumnName="ENT_CODIGO", insertable=false, updatable=false)
+//	})	
+//	private Entidade entidade;	
 	
 	@ElementCollection(targetClass = String.class)
 	@JoinTable( name="usuarioWeb_acesso",
@@ -93,62 +112,21 @@ public class UsuarioWeb implements Serializable{
 		this.nivel = nivel;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((nivel == null) ? 0 : nivel.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		return result;
+	public String getEnt_codigo() {
+		return ent_codigo;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UsuarioWeb other = (UsuarioWeb) obj;
-		if (ativo == null) {
-			if (other.ativo != null)
-				return false;
-		} else if (!ativo.equals(other.ativo))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (nivel == null) {
-			if (other.nivel != null)
-				return false;
-		} else if (!nivel.equals(other.nivel))
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		return true;
+	public void setEnt_codigo(String ent_codigo) {
+		this.ent_codigo = ent_codigo;
 	}
 
-	@Override
-	public String toString() {
-		return "UsuarioWeb [id=" + id + ", login=" + login + ", senha=" + senha + ", ativo=" + ativo + ", nivel="
-				+ nivel + ", acesso=" + acesso + "]";
+	public String getEnt_empresa() {
+		return ent_empresa;
 	}
 
-	
+	public void setEnt_empresa(String ent_empresa) {
+		this.ent_empresa = ent_empresa;
+	}	
 	
 	
 

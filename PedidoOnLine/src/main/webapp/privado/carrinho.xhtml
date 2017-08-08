@@ -16,6 +16,8 @@
 	<ui:define name="corpo">		
 		<h:form>			
 			<div class="container" >
+				<h:outputLabel value="#{usuarioBean.buscaEntidade()}"></h:outputLabel>               
+				
 				<p:dataTable value="#{carrinhoBean.carrinho}" var="carrinho" reflow="true" emptyMessage="Não há itens no registro.">
 					<f:facet name="header">
 						<p:outputPanel>
@@ -29,7 +31,27 @@
 						<h:outputLabel value="#{carrinho.produto.descricao}"></h:outputLabel>
 					</p:column>						
 					<p:column headerText="Quantidade">
-						<p:spinner value="#{carrinho.quantidade}" size="2"></p:spinner>						
+						<p:spinner value="#{carrinho.quantidade}" size="2">
+							<f:convertNumber type="number"/>
+						</p:spinner>
+						<h:commandLink action="#{carrinhoBean.atualizar}">
+							<h:graphicImage library="imagens" name="refresh.png" style="border:0"/>
+							
+							<f:setPropertyActionListener value="#{carrinho.produto}" target="#{carrinhoBean.produto}"/>
+							<f:setPropertyActionListener value="#{carrinho.quantidade}" target="#{carrinhoBean.qtde}"/>							
+						</h:commandLink>
+						<h:commandLink action="#{carrinhoBean.remover}">
+							
+							<h:graphicImage library="imagens" name="trash.png" style="border:0"/>
+							<f:setPropertyActionListener value="#{carrinho.produto}" target="#{carrinhoBean.produto}"/>
+						</h:commandLink>
+						
+						
+						<f:facet name="footer">
+				            <h:outputText value="#{carrinhoBean.qtdeTotal}">
+				            	<f:convertNumber type="number"/>
+				            </h:outputText>
+				        </f:facet>						
 					</p:column>
 					<p:column headerText="Preço">
 						<h:outputLabel value="#{carrinho.produto.preco}">
@@ -40,9 +62,37 @@
 						<h:outputLabel value="#{carrinho.produto.preco * carrinho.quantidade}">
 							<f:convertNumber currencySymbol="R$" type="currency"/>	
 						</h:outputLabel>
-					</p:column>
+						<f:facet name="footer">
+				            <h:outputText value="#{carrinhoBean.valorTotal}" >
+				            	
+				           		<f:convertNumber currencySymbol="R$" type="currency"/>
+				            </h:outputText>
+				        </f:facet>
+					</p:column>				
+							
+					
 				</p:dataTable>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12 col-md-8">
+						</div>
+						<div class="col-xs-6 col-md-4">
+							<p:outputLabel value="Forma de pagamento " />
+					        <p:selectOneListbox value="#{carrinhoBean.formaPagamento}" style="width: 100% !important" onchange="#{carrinhoBean.atualizar()}">		            
+					            <f:selectItems value="#{usuarioBean.formas}" var="fp" itemLabel="#{fp.descricao}" />					             
+					            <p:ajax event="change" update="@form" />		            
+					        </p:selectOneListbox>					          
+					        <br></br>
+					        <p:commandButton rendered="#{not empty carrinhoBean.carrinho and carrinhoBean.formaPagamento.codigo != null}" value="FINALIZAR" style="height:70px; width: 100% !important"></p:commandButton>
+				        </div>
+					
+					</div>
+				</div>	
 			</div>
+			
+			
+					
 		</h:form>	    
 	</ui:define>	
 </ui:composition>

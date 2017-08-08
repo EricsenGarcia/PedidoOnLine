@@ -4,9 +4,15 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import br.com.rlsistemas.pedidosonline.entidade.Entidade;
+import br.com.rlsistemas.pedidosonline.entidade.EntidadeFormaPagamento;
+import br.com.rlsistemas.pedidosonline.entidade.EntidadeRN;
+import br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento;
 import br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWeb;
 import br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWebRN;
 
@@ -15,9 +21,39 @@ import br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWebRN;
 public class UsuarioWebBean {
 	
 	private UsuarioWeb usuario = new UsuarioWeb();
-	private List<UsuarioWeb> lista;
+	private List<UsuarioWeb> lista;	
+	private List<FormaPagamento> formas;	
+	
 
-	public UsuarioWeb getUsuario() {
+	public List<FormaPagamento> getFormas() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		
+		String login = external.getRemoteUser();
+		if (login != null){
+			UsuarioWebRN usuarioRN = new UsuarioWebRN();			
+			
+			Entidade entidade = new Entidade();
+			
+			UsuarioWeb usuarioWeb = new UsuarioWeb();
+			usuarioWeb = usuarioRN.buscarPorLogin(login);
+			
+			EntidadeRN entidadeRn = new EntidadeRN();
+			entidade = entidadeRn.carregar(usuarioWeb.getEnt_codigo(), usuarioWeb.getEnt_empresa());			
+			if (entidade != null){
+				return entidade.getFormas();
+			}
+			
+		}		
+		return null;		
+	}
+
+	public void setFormas(List<FormaPagamento> formas) {
+		this.formas = formas;
+	}
+
+	public UsuarioWeb getUsuario() {		
 		return usuario;
 	}
 
@@ -29,6 +65,32 @@ public class UsuarioWebBean {
 		this.usuario = new UsuarioWeb();
 		
 		return "/publico/novoUsuario";
+	}	
+	
+	
+	public String buscaEntidade(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		
+		String login = external.getRemoteUser();
+		if (login != null){
+			UsuarioWebRN usuarioRN = new UsuarioWebRN();			
+			
+			Entidade entidade = new Entidade();
+			
+			UsuarioWeb usuarioWeb = new UsuarioWeb();
+			usuarioWeb = usuarioRN.buscarPorLogin(login);
+			
+			EntidadeRN entidadeRn = new EntidadeRN();
+			entidade = entidadeRn.carregar(usuarioWeb.getEnt_codigo(), usuarioWeb.getEnt_empresa());			
+			if (entidade != null){
+				return entidade.getNome() +" - "+ entidade.getRepresentante().getNome();
+			}
+			
+		}
+		
+		return null;	
 	}
 	
 	public String salvar(){
@@ -65,6 +127,10 @@ public class UsuarioWebBean {
 	public void setLista(List<UsuarioWeb> lista) {
 		this.lista = lista;
 	}
+
+	
+	
+	
 	
 	
 
