@@ -31,7 +31,7 @@
 						<h:outputLabel value="#{carrinho.produto.descricao}"></h:outputLabel>
 					</p:column>						
 					<p:column headerText="Quantidade">
-						<p:spinner value="#{carrinho.quantidade}" size="2">
+						<p:spinner value="#{carrinho.quantidade}" size="2" min="1">
 							<f:convertNumber type="number"/>
 						</p:spinner>
 						<h:commandLink action="#{carrinhoBean.atualizar}">

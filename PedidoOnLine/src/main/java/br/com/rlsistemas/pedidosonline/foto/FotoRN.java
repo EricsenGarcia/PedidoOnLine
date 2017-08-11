@@ -2,6 +2,7 @@ package br.com.rlsistemas.pedidosonline.foto;
 
 import java.util.List;
 
+import br.com.rlsistemas.pedidosonline.produto.Produto;
 import br.com.rlsistemas.pedidosonline.util.DAOFactory;
 
 public class FotoRN {
@@ -18,5 +19,9 @@ public class FotoRN {
 
 	public List<Foto> listar(){
 		return this.fotoDao.listar();
+	}
+	
+	public List<Foto> listarProduto(Produto produto){
+		return this.fotoDao.listarProduto(produto);
 	}
 }

@@ -29,37 +29,6 @@ public class EntidadeDAOHibernate implements EntidadeDAO {
 		Entidade entidade = new Entidade();
 		entidade = (Entidade) criteria.uniqueResult();
 		return entidade;
-	}
-
-	public List<FormaPagamento> listFormas(Entidade entidade) {
-////		Criteria criteria = session.createCriteria(EntidadeFormaPagamento.class);
-////		criteria.add(Restrictions.eq("entidade.ent_codigo", entidade.getId().getEnt_codigo()));
-////		criteria.add(Restrictions.eq("entidade.empresa", entidade.getId().getEmpresa()));
-//		
-//		List<EntidadeFormaPagamento> lista = new ArrayList<EntidadeFormaPagamento>();		
-//		lista = listEntFormas(entidade); 
-//		
-//		List<FormaPagamento> listaForma = new ArrayList<FormaPagamento>();
-//		for	(int i = 0; i < lista.size(); i++){
-//			listaForma.add(lista.get(i).getFormaPagamento() );
-//		}
-//		
-//		return listaForma;
-		return null;
-	}
-//	
-//	public List<EntidadeFormaPagamento> listEntFormas(Entidade entidade) {
-//		String hql = "select u from EntidadeFormaPagamento u where u.entidade.id.ent_Codigo = :ent_Codigo";
-//		Query consulta = this.session.createQuery(hql);
-//		consulta.setString("ent_Codigo", entidade.getId().getEnt_codigo());
-//		
-//		return (List<EntidadeFormaPagamento>) consulta.list();
-//		
-////		Criteria criteria = session.createCriteria(EntidadeFormaPagamento.class);
-////		criteria.add(Restrictions.eq("entidade.ent_codigo", entidade.getId().getEnt_codigo()));
-////		criteria.add(Restrictions.eq("entidade.empresa", entidade.getId().getEmpresa()));
-////		
-////		return criteria.list(); 
-//	}
+	}	
 
 }

@@ -10,7 +10,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import br.com.rlsistemas.pedidosonline.entidade.Entidade;
-import br.com.rlsistemas.pedidosonline.entidade.EntidadeFormaPagamento;
 import br.com.rlsistemas.pedidosonline.entidade.EntidadeRN;
 import br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento;
 import br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWeb;

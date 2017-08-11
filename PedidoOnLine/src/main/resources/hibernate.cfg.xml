@@ -31,8 +31,11 @@
 		<mapping class="br.com.rlsistemas.pedidosonline.usuarioWeb.UsuarioWeb"></mapping>
 		<mapping class="br.com.rlsistemas.pedidosonline.entidade.Entidade"></mapping>
 		<mapping class="br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento"></mapping>
-		<mapping class="br.com.rlsistemas.pedidosonline.representante.Representante"></mapping>
-		<mapping class="br.com.rlsistemas.pedidosonline.entidade.EntidadeFormaPagamento"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.representante.Representante"></mapping>		
+		<mapping class="br.com.rlsistemas.pedidosonline.grupo.Grupo"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.subGrupo.SubGrupo"></mapping>
+		<mapping class="br.com.rlsistemas.pedidosonline.classe.Classe"></mapping>
+		
 		
 	</session-factory>	
 	

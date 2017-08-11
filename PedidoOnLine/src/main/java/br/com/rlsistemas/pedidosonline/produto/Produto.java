@@ -1,10 +1,20 @@
 package br.com.rlsistemas.pedidosonline.produto;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import br.com.rlsistemas.pedidosonline.classe.Classe;
+import br.com.rlsistemas.pedidosonline.subGrupo.SubGrupo;
 
 @Entity
 public class Produto implements Serializable{
@@ -18,6 +28,25 @@ public class Produto implements Serializable{
 
 	@Column(name="PRO_PRECOVENDA")
 	private Double preco;
+	
+	@Column(name="PRO_PROMOCAO")
+	private Integer promocao;
+	
+	@OneToOne
+	@JoinColumns(
+			{
+				@JoinColumn(name="GRUPO_CODIGO", referencedColumnName="GRUPO_CODIGO"),
+				@JoinColumn(name="SUBG_CODIGO", referencedColumnName="SUBG_CODIGO")
+			}
+			)
+	private SubGrupo subGrupo;
+	
+	@OneToOne
+	@JoinColumn(name="CLASSE_CODIGO", referencedColumnName="CLASSE_CODIGO")
+	private Classe classe;
+	
+	@Column(name="PRO_OBS")
+	private String observacao;
 	
 
 	public Double getPreco() {
@@ -46,43 +75,39 @@ public class Produto implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}	
+	
+
+	public Integer getPromocao() {
+		return promocao;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
-		return result;
+	public void setPromocao(Integer promocao) {
+		this.promocao = promocao;
+	}
+	
+	public SubGrupo getSubGrupo() {
+		return subGrupo;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produto other = (Produto) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (preco == null) {
-			if (other.preco != null)
-				return false;
-		} else if (!preco.equals(other.preco))
-			return false;
-		return true;
+	public void setSubGrupo(SubGrupo subGrupo) {
+		this.subGrupo = subGrupo;
+	}	
+
+	public Classe getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}	
+	
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@Override

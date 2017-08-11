@@ -29,6 +29,9 @@ public class CarrinhoBean {
 	private Double qtdeTotal = 0.0;
 	private Double valorTotal = 0.0;
 	
+	private String filtrando;
+	private String filtroInterno;
+	
 
 	public CarrinhoBean(){
 		this.carrinho = new ArrayList<Carrinho>();
@@ -116,17 +119,22 @@ public class CarrinhoBean {
 	public void novoProduto3(Produto produto, Double qtde){		
 		Carrinho car = new Carrinho();	
 		
-		car.setProduto(produto);
-		if (qtde == null){
-			car.setQuantidade(1.0);
-		} else {
-			car.setQuantidade(qtde);
+		if (produto != null) {
+			car.setProduto(produto);
+			if (qtde == null){
+				car.setQuantidade(1.0);
+			} else {
+				car.setQuantidade(qtde);
+			}
+			
+			this.carrinho.add(car);		
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Sucesso","Adicionado ao carrinho: "+produto.getDescricao()));		
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Erro","Problemas ao adicionar o produto ao carrinho."));
 		}
-		
-		this.carrinho.add(car);		
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Sucesso","Adicionado ao carrinho: "+produto.getDescricao()));		
 	}
 	
 	
@@ -147,21 +155,22 @@ public class CarrinhoBean {
 //		produtoBean.consultaProduto("");
 	}
 	
-	public String teste2(String cod){
+	public String teste2(){
 //		FacesContext context = FacesContext.getCurrentInstance();
 //		ProdutoBean produtoBean = (ProdutoBean) context.getELContext().getELResolver().getValue(context.getELContext(),
 //				null, "produtoBean");
 		
+		Carrinho car = new Carrinho();	
+		car.setProduto(this.produto);
+		if (this.qtde == null){
+			car.setQuantidade(1.0);
+		}else{
+			car.setQuantidade(this.qtde);
+		}
 		
+		this.carrinho.add(car);		
 		
-		Produto prod = new Produto(); 
-		
-		ProdutoRN produtoRN = new ProdutoRN();
-		prod = produtoRN.carregar(cod);
-		
-		this.novoProduto3(prod,1.0);
-		
-		return "principal";
+		return null;
 		
 	}
 
@@ -196,7 +205,30 @@ public class CarrinhoBean {
 	public void setQtde(Double qtde) {
 		this.qtde = qtde;
 	}
+
+	public String getFiltrando() {
+		return filtrando;
+	}
+
+	public void setFiltrando(String filtrando) {
+		this.filtrando = filtrando;
+	}
+
+	public void setQtdeTotal(Double qtdeTotal) {
+		this.qtdeTotal = qtdeTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public String getFiltroInterno() {
+		return filtroInterno;
+	}
+
+	public void setFiltroInterno(String filtroInterno) {
+		this.filtroInterno = filtroInterno;
+	}
 	
-	
-	
+		
 }

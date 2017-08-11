@@ -36,4 +36,10 @@ public class FotoDAOHibernate implements FotoDAO {
 		return this.session.createCriteria(Foto.class).list();		
 	}
 
+	public List<Foto> listarProduto(Produto produto) {
+		Criteria criteria =  session.createCriteria(Foto.class);
+		criteria.add(Restrictions.eq("id.codigo", produto.getCodigo()));		
+		return criteria.list();
+	}
+
 }

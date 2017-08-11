@@ -8,20 +8,66 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />	
+	<script type="text/javascript" src="../resources/js/principal.js"></script>
+	<script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
 </h:head>
 
-<h:body>
-	<h1>Produto Cadastrado</h1>
+<ui:composition template="/templates/interna.xhtml" id="interno">
+	<ui:define name="corpo">
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+						
+			<div class="container">
+						
+			
+				<div class="col-xs-6">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					 	
+						<p:imageSwitch widgetVar="switcher" id="manuelSwitcher"
+						    slideshowAuto="false">
+						    <ui:repeat value="#{fotoBean.listaStr}" var="im" id="manuelSwitcherImages">
+						        <h:graphicImage value="data:image/jpeg;base64,#{im}" style="max-width: 98%; z-index:0 !important;" />
+						    </ui:repeat>
+						</p:imageSwitch>
+						
+	                     							  
+						<p:commandLink 	class="left carousel-control" onclick="PF('switcher').previous();">
+						    <span class="icon-prev" aria-hidden="true"></span>
+	    					<span class="sr-only">Previous</span>
+						</p:commandLink>
+						
+						<p:commandLink 	class="right carousel-control" onclick="PF('switcher').next();">
+							<span class="icon-next" aria-hidden="true"></span>
+	    					<span class="sr-only">Next</span>
+						</p:commandLink>
+					</div>	
+									
+				</div>	
+				<div class="col-xs-6">
+					<h2>#{produtoBean.produto.descricao}</h2>													
+					<h3>#{produtoBean.produto.codigo}</h3>
+					
+					<div style="min-height: 200px">
+						<span>Descrição:</span>
+						<h:outputLabel value="#{produtoBean.produto.observacao}"></h:outputLabel>
+					</div> 
+					<h:panelGrid columns="2">	
+						<h:graphicImage library="imagens" name="star.png" style="border:0" rendered="#{produtoBean.produto.promocao==0}"/>
+						<h3 class="prodPreco">R$ #{produtoBean.produto.preco}</h3>	
+					</h:panelGrid>	
+					<p:spinner binding="#{qt}" size="2" min="1" value="1"/>	
+					<p:commandButton 	icon="ui-icon-cart" value="Comprar" 
+										actionListener="#{carrinhoBean.novoProduto3(produtoBean.produto, qt.value)}" update="growl formFiltro">											
+					</p:commandButton>
+				</div>				
+					
+			</div>	
+		</h:form>
+	</ui:define>
+</ui:composition>
 	
-	Nome: <h:outputLabel value="#{produtoBean.produto.codigo}"></h:outputLabel> <br></br>
-	Descrição: <h:outputLabel value="#{produtoBean.produto.descricao}"></h:outputLabel> <br></br>
-	<ui:repeat var="foto" value="#{fotoBean.lista}">
-		<h:outputLabel value="#{foto.id.codigo}"></h:outputLabel><br></br>
-	</ui:repeat>	
-	
-	<h:form>
-		<h:commandButton action="index" value="Inicio"></h:commandButton>
-	</h:form>
-</h:body>
+
 </html>

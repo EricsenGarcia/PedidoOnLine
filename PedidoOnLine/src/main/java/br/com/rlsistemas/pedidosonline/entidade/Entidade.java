@@ -36,7 +36,7 @@ public class Entidade implements Serializable{
 	@OneToMany
 	@JoinTable(name="ENTIDADE_FORMAPAGAMENTO"
 		,joinColumns={
-				@JoinColumn(columnDefinition="EMPRESA", name="EMPRESA"),
+			@JoinColumn(columnDefinition="EMPRESA", name="EMPRESA"),
 			@JoinColumn(columnDefinition="ENT_CODIGO", name="ENT_CODIGO" )						
 		}
 		,inverseJoinColumns={

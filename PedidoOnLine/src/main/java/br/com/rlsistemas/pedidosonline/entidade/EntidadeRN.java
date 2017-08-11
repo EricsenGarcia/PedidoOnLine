@@ -1,8 +1,6 @@
 package br.com.rlsistemas.pedidosonline.entidade;
 
 import java.util.List;
-
-import br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento;
 import br.com.rlsistemas.pedidosonline.util.DAOFactory;
 
 public class EntidadeRN {
@@ -17,8 +15,6 @@ public class EntidadeRN {
 		return this.entidadeDao.carregar(codigo, empresa);
 	}
 	
-	public List<FormaPagamento> listaForma(Entidade entidade){
-		return this.entidadeDao.listFormas(entidade);
-	}
+	
 
 }

@@ -28,8 +28,8 @@ public class ProdutoRN {
 		return this.produtoDao.listar();
 	}
 	
-	public List<Produto> listarComFiltro(String filtro){
-		return this.produtoDao.listarFiltro(filtro);
+	public List<Produto> listarComFiltro(String filtro, String filtroInterno){
+		return this.produtoDao.listarFiltro(filtro, filtroInterno);
 	}
 
 }

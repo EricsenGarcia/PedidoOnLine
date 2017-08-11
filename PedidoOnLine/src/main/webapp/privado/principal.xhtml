@@ -12,35 +12,44 @@
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 </h:head>
 
-<ui:composition template="/templates/interna.xhtml">
+<ui:composition template="/templates/interna.xhtml" id="interno">
 	<ui:define name="corpo">
 		<h:form>
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />			
-			<div class="container" >
-			 							
-				<ui:repeat var="produto" value="#{produtoBean.consultaUrl()}">			
-					<div class="col-lg-3 col-md-6 mb-r" style="height: 358px">										
+			<div class="container" >			
+			
+			 	<p:dataScroller value="#{produtoBean.consultaUrl()}" var="produto" chunkSize="16" styleClass="dataScroller">						
+							
+					<div class="col-lg-3 col-md-6 mb-r blocoProduto">										
 						<div class="card card-cascade narrower">
 										
 							<div class="view overlay hm-white-slight" style="max-height: 300px; max-width:200px; min-height: 200px" >							 							 						
-								 <h:graphicImage 	value="data:image/png;base64,#{fotoBean.buscaFoto(produto)}"  
+								 <h:graphicImage 	value="data:image/png;base64,#{fotoBean.buscaFoto(produto,1)}"  
 								 					class="img-fluid" alt="" 
 								 					style="max-height: 300px; max-width:200px"/>
-							</div>
-													
+							</div>													
 							<div class="card-block text-center">
-								<h:inputHidden value="#{produto.codigo}" binding="#{codigo}" />						
-								<div class="nomeProd">							
-									<p class="card-text">#{produto.descricao}</p>
-								</div>
-								<div class="card-footer">
-									<h3 class="prodPreco">R$ #{produto.preco}</h3>								
-									<h:panelGrid columns="2">																			
-										<p:spinner binding="#{qt}" size="2" min="1" value="1"/>									
+								<h:inputHidden value="#{produto.codigo}" binding="#{codigo}" />
+								<h:outputLabel value="#{produto.subGrupo.codigo.grupo.descricao}" class="grupo"></h:outputLabel>																						
+								<p:commandLink action="#{produtoBean.detalhar()}">
+									<div class="nomeProd">														
+										<p class="card-text">#{produto.descricao}</p>
+									</div>
+									
+									<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}"/>								
+								</p:commandLink>
+								
+								<div class="card-footer" >
+									<h:panelGrid columns="2" style="margin: auto">	
+										<h:graphicImage library="imagens" name="star.png" style="border:0" rendered="#{produto.promocao==0}"/>
+										<h3 class="prodPreco">R$ #{produto.preco}</h3>	
+									</h:panelGrid>							
+									<h:panelGrid columns="2" style="margin: auto">																			
+										<p:spinner binding="#{qt}" size="2" min="1" value="1"/>	
 										<p:commandButton 	icon="ui-icon-cart" value="Comprar" 
-															actionListener="#{carrinhoBean.teste(codigo.value)}" update="growl">						
-											
-										</p:commandButton>																				
+															actionListener="#{carrinhoBean.novoProduto3(produto, qt.value)}" update="growl formFiltro">											
+										</p:commandButton>
+																													
 									</h:panelGrid>								
 								</div>							
 								
@@ -48,7 +57,8 @@
 							
 						</div>
 					</div>
-				</ui:repeat>			
+					
+				</p:dataScroller>			
 			</div>			
 		</h:form>
 	</ui:define>

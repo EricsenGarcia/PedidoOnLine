@@ -9,9 +9,11 @@
 	<h:outputStylesheet library="css" name="estilo.css" />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<script type="text/javascript" src="../resources/js/principal.js"></script>
+	<script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
 </h:head>
-<h:body>
-	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top scrolling-navbar">
+<h:body>	
+	<nav id="nav_bar" class="navbar navbar-toggleable-md navbar-inverse fixed-top scrolling-navbar">
 		<div class="container">		
 			<div class="navbar-header">
 				<!-- 
@@ -21,25 +23,115 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				 -->
-				<h:form>				
-					<p:commandLink class="navbar-brand" action="principal?faces-redirect=true">Home</p:commandLink>
-					<p:commandLink class="navbar-brand" action="listProduto">Produtos</p:commandLink>					
+				 -->	
+				<h:form>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>							
+								<p:commandLink class="navbar-brand" action="#{produtoBean.home()}" style="padding:10px;">
+									<h:graphicImage library="imagens" name="rlm.png" class="logoPequena" />
+								</p:commandLink>
+							</li>																
+							
+							<li>
+								<p:commandLink class="navbar-brand" action="#{produtoBean.home()}" style="padding:20px;">Home</p:commandLink><!-- "principal?faces-redirect=true" -->
+							</li>
+							
+							<li>
+								<p:commandLink class="navbar-brand" action="listProduto" style="padding:20px;">Produtos</p:commandLink>
+							</li>
+							
+							<li>
+								<p:commandLink class="navbar-brand" action="#{produtoBean.consultaProdutoPromocao()}" style="padding:20px;">Promoção</p:commandLink>
+							</li>
+							
+							<li>
+								<p:commandLink class="navbar-brand" id="filtroBtn" value="Filtrar" style="padding:20px;"/>
+					            	<p:overlayPanel id="filtroPanel" for="filtroBtn" hideEffect="fade" dynamic="true" style="width:200px">
+										
+										<p:commandLink id="grupoBtn" value="Grupo" class="subMenu"/>
+										<p:overlayPanel id="grupoPanel" for="grupoBtn" hideEffect="fade" dynamic="true" style="width:600px">
+											<p:dataTable var="grupo" value="#{grupoBean.lista}" scrollable="true" scrollHeight="200">
+					            								            			
+						            			<p:column headerText="Grupos">
+						            				<p:commandLink action="#{produtoBean.filtraGrupo()}">
+						            					<h:outputText value="#{grupo.descricao}"></h:outputText>
+						            					<f:setPropertyActionListener value="#{grupo}" target="#{produtoBean.grupo}"/>
+						            				</p:commandLink>
+						            			</p:column>
+					            			
+					            			</p:dataTable>		
+										</p:overlayPanel>
+										
+										<br></br>
+										<br></br>
+										
+										<p:commandLink id="subGrupoBtn" value="SubGrupo" class="subMenu"/>
+										<p:overlayPanel id="subGrupoPanel" for="subGrupoBtn" hideEffect="fade" dynamic="true" style="width:600px">
+											<p:dataTable var="subGrupo" value="#{subGrupoBean.lista}" scrollable="true" scrollHeight="200">					            				
+						            			
+						            			<p:column headerText="Sub-Grupos">
+						            				<p:commandLink action="#{produtoBean.filtraSubGrupo()}">
+						            					<h:outputText value="#{subGrupo.descricao}"></h:outputText>						            					
+						            					
+						            					<f:setPropertyActionListener value="#{subGrupo}" target="#{produtoBean.subGrupo}"/>
+						            				</p:commandLink>
+						            			</p:column>
+					            			
+					            			</p:dataTable>		
+										</p:overlayPanel>
+										
+										<br></br>
+										<br></br>
+										
+										<p:commandLink id="classeBtn" value="Classe" class="subMenu"/>
+										<p:overlayPanel id="classePanel" for="classeBtn" hideEffect="fade" dynamic="true" style="width:600px">
+											<p:dataTable var="classe" value="#{classeBean.lista}" scrollable="true" scrollHeight="200">					            				
+						            			
+						            			<p:column headerText="Classe">
+						            				<p:commandLink action="#{produtoBean.filtraClasse()}">
+						            					<h:outputText value="#{classe.descricao}"></h:outputText>						            					
+						            					
+						            					<f:setPropertyActionListener value="#{classe}" target="#{produtoBean.classe}"/>
+						            				</p:commandLink>
+						            			</p:column>
+					            			
+					            			</p:dataTable>		
+										</p:overlayPanel>
+					            	</p:overlayPanel>
+							</li>
+					     </ul> 
+					</div>
+									
 					<!--  <p:commandLink class="navbar-brand" action="/admin/listUsuario" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}" >Usuários</p:commandLink>-->					
-					<p:commandLink class="navbar-brand" action="carrinho">Carrinho</p:commandLink>
-				</h:form>							
+					<!-- <p:commandLink class="navbar-brand" action="carrinho">Carrinho</p:commandLink> -->
+					
+				</h:form>	 			
+										
 			</div>		  		
 			
-			<h:form class="navbar-form navbar-right">
-				<div class="form-group">					 
-					
-					<h:inputText value="#{produtoBean.filtro}" type="text" class="form-control" placeholder="O que precisa?"/>
-					<h:commandButton action="#{produtoBean.consultaProduto(produtoBean.filtro)}" />
-					
-    					
-    				
-					
-					
+			<h:form class="navbar-form navbar-right" id="formFiltro">
+				<div class="form-group">					
+					<h:inputText value="#{carrinhoBean.filtrando}" type="text" class="form-control" placeholder="O que precisa?"/>
+					<!--  <h:commandButton action="#{produtoBean.consultaProduto(produtoBean.filtro)}" /> -->
+				</div>
+				<div class="form-group">					
+					<h:graphicImage library="imagens" name="user2.png" style="border:0"/>
+					<div class="form-group">
+						<span class="usuario">Usuário: #{request.remoteUser}</span>	
+						<br></br>							
+						<a onclick="document.location='#{request.contextPath}/j_spring_security_logout'" title="Sair" class="sair">Sair</a>
+					</div>
+				</div>
+				
+				<div class="form-group" id="divCarrinho">					
+					<h:commandLink action="carrinho">
+						<h:graphicImage library="imagens" name="cart.png" style="border:0"/>
+						<!--  <span class="itensCarrinho">#{carrinhoBean.qtdeTotal}</span> -->
+						<h:outputLabel class="itensCarrinho" value="#{carrinhoBean.qtdeTotal}"> 
+							<f:convertNumber type="number"></f:convertNumber>
+						</h:outputLabel>					
+					</h:commandLink>
 				</div>						
 			</h:form>
 		</div>
@@ -51,3 +143,6 @@
 	
 </h:body>
 </html>
+
+
+

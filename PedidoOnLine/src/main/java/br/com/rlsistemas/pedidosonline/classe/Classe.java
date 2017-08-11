@@ -1,0 +1,37 @@
+package br.com.rlsistemas.pedidosonline.classe;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CLASSE")
+public class Classe {
+	
+	@Id
+	@Column(name="CLASSE_CODIGO")
+	private String codigo;
+	
+	@Column(name="CLASSE_DESCRICAO")
+	private String descricao;
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+
+}

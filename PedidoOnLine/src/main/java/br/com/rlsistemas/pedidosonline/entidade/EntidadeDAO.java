@@ -6,7 +6,6 @@ import br.com.rlsistemas.pedidosonline.formaPagamento.FormaPagamento;
 
 public interface EntidadeDAO {
 	
-	public Entidade carregar(String codigo, String empresa);
-	public List<FormaPagamento> listFormas(Entidade entidade);
+	public Entidade carregar(String codigo, String empresa);	
 
 }

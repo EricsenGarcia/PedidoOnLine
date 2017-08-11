@@ -9,6 +9,6 @@ public interface ProdutoDAO {
 	public void excluir(Produto produto);
 	public Produto carregar(String codigo);
 	public List<Produto> listar();
-	public List<Produto> listarFiltro(String filtro);
+	public List<Produto> listarFiltro(String filtro, String filtroInterno);
 
 }
